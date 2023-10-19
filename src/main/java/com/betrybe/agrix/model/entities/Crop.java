@@ -35,6 +35,9 @@ public class Crop {
     this.plantedArea = plantedArea;
   }
 
+  public Crop() {
+  }
+
   public Long getId() {
     return id;
   }

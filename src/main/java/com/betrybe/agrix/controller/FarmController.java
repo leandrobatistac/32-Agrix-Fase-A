@@ -74,4 +74,23 @@ public class FarmController {
       return ResponseEntity.status(HttpStatus.CREATED).body(CropDto.convertToCrop(createdCrop));
     }
   }
+
+  /**
+   * Javadoc.
+   */
+  @GetMapping("/{farmId}/crops")
+  public ResponseEntity<?> getCropsById(@PathVariable Long farmId) {
+    Optional<Farm> farm = farmService.getById(farmId);
+
+    if (farm.isPresent()) {
+      return ResponseEntity.ok(cropService.getByFarmId(farmId).stream()
+              .map(crop -> new CropDto(
+                      crop.getId(),
+                      crop.getName(),
+                      crop.getPlantedArea(),
+                      crop.getFarm().getId())));
+    } else {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Fazenda não encontrada!");
+    }
+  }
 }
