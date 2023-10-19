@@ -26,6 +26,15 @@ public class Crop {
   @JoinColumn(name = "farm_id")
   private Farm farm;
 
+  /**
+   * Javadoc.
+   */
+  public Crop(Long id, String name, Double plantedArea, Long farm) {
+    this.id = id;
+    this.name = name;
+    this.plantedArea = plantedArea;
+  }
+
   public Long getId() {
     return id;
   }
